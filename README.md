@@ -6,6 +6,8 @@ I am a software developer, based out of Bangalore, India, with more than 13 year
 
 I am currently developing AI/ML solutions to help customers with their business requirements, with a key focus on natural language processing (NLP), deep learning, computer vision, and linear and logistic regression.
 
+More details regarding my work portfolio are available at my GIT repository: https://github.com/AdithyaKR001/My_portfolio
+
 I hold a post-graduate Master of Science (M.Sc.) degree in Machine Learning and Artificial Intelligence (ML and AI) from Liverpool John Moores University (LJMU), United Kingdom and a graduate engineering degree, B.E. in Computer Science and Engineering, from Anna University, Chennai, India.
 
 My key skills include:
