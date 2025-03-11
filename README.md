@@ -17,7 +17,35 @@ My key skills include:
 
 ## **2. My projects:**
 
-### **a. Natural Language Processing:**
+### **a. Agentic AI Projects:**
+
+#### **i.	SmartResolve: AI-powered RAG Agent for Quick Incident Resolution:**
+
+* Development of a RAG (Retrieval-Augmented Generation) AI-agent to help resolve customer incidents quickly, using the knowledge base of past resolved incidents. For a particular incident, the AI agent will retrieve the top 10 similar incidents, based on the details shared in the current open incident.
+
+* Programming language used: Python.
+
+* Python libraries used:
+    * Langchain
+    * ChatOpenAI
+    * OpenAIEmbeddings
+    * HanaDB
+    * FastAPI
+* Other technologies used:
+    * Databricks: for mass data pre-processing and vectorization.
+    * Streamlit: front-end chat application (integrated with ServiceNow) leveraging ChatOpenAI library for conversational and visualization capabilities.
+    * A cloud foundry application with API endpoints implemented using FASTAPI, integrated with the Streamlit front-end chat application, that provides the results of the incident similarity search.
+
+* Datasets used:
+    * Historical data of all the customers incidents resolved till date, obtained via APIs, from ServiceNow.
+
+* Processing steps:
+    * Data pre-processing module:redundant feature elimination, feature engineering i.e. creation of incident metadata column and incident details column, with appropriate information labelling.
+    * Data Vectorization module: Chunking and storing the vectorized (embeddings) version of the incident information in the HANA vector database.
+    * Similarity Search module: Takes input incident information via chat application, looks up the vector database, and returns the top 10 relevant incidents.
+
+
+### **b. Natural Language Processing:**
 
 #### **i.	Emotion and Personality Trait Detection from social media text:**
 
@@ -76,7 +104,7 @@ My key skills include:
     * Feature extraction, model building and evaluation using CRF.
     * Disease-Treatment dictionary creation.
 
-## **b.	Computer Vision:**
+## **c.	Computer Vision:**
 
 #### **i.	Skin Cancer Detection:**
 
@@ -107,7 +135,7 @@ My key skills include:
     * Data augmentation and splitting.
     * Model training and evaluation.
 
-## **c.	Other projects:**
+## **d.	Other projects:**
 
 #### **i.	Customer churn classifier for the Telecom Industry:**
 
