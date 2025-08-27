@@ -1,10 +1,10 @@
 # <div style="text-align: center;"> My Portfolio </div>
 
 ## **1. Introduction:**
-I am a software developer, based out of Bangalore, India, with more than 14 years of experience in designing and developing software features and products that meet or exceed customer expectations.
+I am a software developer, based out of Bangalore, India, with more than 15 years of experience in designing and developing software features and products that meet or exceed customer expectations.
 
 
-I am currently developing AI/ML solutions to help customers with their business requirements, with a key focus on agentic AI development, deep learning, natural language processing (NLP), computer vision, and linear and logistic regression.
+I am currently developing AI/ML solutions to help customers with their business requirements, with a key focus on Large Language Models(LLMs), agentic AI development, deep learning, natural language processing (NLP), computer vision, and linear and logistic regression.
 
 More details regarding my work portfolio are available at my GIT repository: https://github.com/AdithyaKR001/My_portfolio
 
@@ -14,6 +14,10 @@ My key skills include:
 * Python
 * Natural Language Processing.
 * Deep Learning.
+* Agentic AI.
+* Large Language Models(LLMs).
+* Linear Regression.
+* Logistic Regression.
 
 ## **2. My projects:**
 
