@@ -18,12 +18,44 @@ My key skills include:
 * Large Language Models(LLMs).
 * Linear Regression.
 * Logistic Regression.
+* Full-stack development.
+* Java.
+* Node.js
 
 ## **2. My projects:**
 
-### **a. Agentic AI Projects:**
+### **a. Large Language Models(LLMs) & Agentic AI Projects:**
 
-#### **i.	SmartResolve: AI-powered RAG Agent for Quick Incident Resolution:**
+#### **i.	LS Hub:AI Medical Summary Generation using LLMs**
+
+* Development of an application to generate AI-based LLM medical summaries to calculate the life expectancy of patients, using large-language models, to speed up medical insurance calculation by 70% and find candidates for potential insurance arbitration by 60%.
+
+* Programming languages used: Python and Node.js.
+
+* Python libraries used:
+    * OlmOCR
+    * AWS Textract
+    * OpenAI
+    * Flask
+    * Puppeteer
+* Other technologies used:
+    * DigitalOcean: cloud computing platform to host the microservices for the various functionalities of the application.
+    * Large Language Models used:
+       * ChatGPT 5.0 Mini.
+       * Gemini 2.5 Flash.
+       * Grok 3. 
+
+* Datasets used:
+    * Historical medical records of customers and manually generated medical summaries in PDF format.
+    * Expert-calculated age-wise and gender-wise mortality multiplier information in csv format.
+
+* Processing steps:
+    * OCR: conversion of input information in PDF format into textual format (.jsonl output).
+    * De-identification: removal of personally identifiable information (PII) from the OCRed data (.jsonl output).
+    * Summarization: generation of medical summary using the de-identified information (with program-based chunking), pre-built input prompt and expert-created mortality multiplier information (.jsonl output).
+    * Report generation: generating an output PDF report in a specific format, for presentation of the AI-based medical summary from the previous step (.pdf output).
+
+#### **ii.	SmartResolve: AI-powered RAG Agent for Quick Incident Resolution:**
 
 * Development of a RAG (Retrieval-Augmented Generation) AI-agent to help resolve customer incidents quickly, using the knowledge base of past resolved incidents. For a particular incident, the AI agent will retrieve the top 10 similar incidents, based on the details shared in the current open incident.
 
