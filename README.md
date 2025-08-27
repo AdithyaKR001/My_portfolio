@@ -40,6 +40,7 @@ My key skills include:
     * Puppeteer
 * Other technologies used:
     * DigitalOcean: cloud computing platform to host the microservices for the various functionalities of the application.
+    * Firebase: to store the input and output files and to log the generated summary and runtime errors in RTDB.
     * Large Language Models used:
        * ChatGPT 5.0 Mini.
        * Gemini 2.5 Flash.
