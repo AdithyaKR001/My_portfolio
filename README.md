@@ -26,7 +26,7 @@ My key skills include:
 
 ### **a. Large Language Models(LLMs) & Agentic AI Projects:**
 
-#### **i.	LS Hub:AI Medical Summary Generation using LLMs**
+#### **i.	LS Hub:AI Medical Summary Generation using LLMs:**
 
 * Development of an application to generate AI-based LLM medical summaries to calculate the life expectancy of patients, using large-language models, to speed up medical insurance calculation by 70% and find candidates for potential insurance arbitration by 60%.
 
@@ -43,7 +43,7 @@ My key skills include:
     * Large Language Models used:
        * ChatGPT 5.0 Mini.
        * Gemini 2.5 Flash.
-       * Grok 3. 
+       * Grok 3.0. 
 
 * Datasets used:
     * Historical medical records of customers and manually generated medical summaries in PDF format.
