@@ -26,7 +26,7 @@ My key skills include:
 
 ### **a. Large Language Models(LLMs) & Agentic AI Projects:**
 
-#### **i.	AI Medical Summary Generation using LLMs for client in the insurance domain:**
+#### **i.	AI Medical Summary Generation using LLMs for client in the medical insurance domain:**
 
 * Development of an application to generate AI-based LLM medical summaries to calculate the life expectancy of patients, using large-language models, to speed up medical insurance calculation by 70% and find candidates for potential insurance arbitration by 60%.
 
