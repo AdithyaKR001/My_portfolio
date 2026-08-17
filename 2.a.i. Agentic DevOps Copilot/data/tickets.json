@@ -1,0 +1,20 @@
+[
+  {
+    "id": "TICK-501",
+    "title": "Flaky integration test in dmc-insights-service",
+    "status": "open",
+    "pipeline_id": "pipe-1002",
+    "assignee": "meera.k",
+    "created_at": "2026-08-12T10:00:00Z",
+    "description": "OrderServiceIT intermittently times out against hana-test."
+  },
+  {
+    "id": "TICK-502",
+    "title": "Artifactory missing llm-router 2.4.x",
+    "status": "in_progress",
+    "pipeline_id": "pipe-1004",
+    "assignee": "adithya.r",
+    "created_at": "2026-08-13T14:20:00Z",
+    "description": "Publish llm-router 2.4.1 or pin gateway to 2.3.9."
+  }
+]

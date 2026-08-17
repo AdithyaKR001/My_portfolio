@@ -1,0 +1,57 @@
+name: agent-eval
+
+# Automated evaluation pipeline.
+# - Deterministic tests (data, tools, scorers, trace extraction) run on EVERY push/PR
+#   with no secrets required.
+# - The full LLM-in-the-loop agent eval runs only when an OPENAI_API_KEY secret is
+#   configured, and gates the build on the pass-rate threshold.
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  deterministic-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Data + tool layer check
+        run: python test_tools.py
+      - name: Eval harness unit tests (no LLM)
+        run: python -m eval.test_eval
+
+  agent-eval:
+    runs-on: ubuntu-latest
+    needs: deterministic-tests
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run agent evaluation (gates on pass rate)
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "No OPENAI_API_KEY secret set — skipping live agent eval."
+            exit 0
+          fi
+          python -m eval.run_eval --threshold 0.8
+      - name: Upload evaluation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-report
+          path: |
+            eval/report.json
+            eval/report.md
+          if-no-files-found: ignore

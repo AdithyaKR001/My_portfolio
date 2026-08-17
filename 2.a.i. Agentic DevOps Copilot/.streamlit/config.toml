@@ -1,0 +1,4 @@
+[client]
+# Hide the built-in "Deploy" button and the "..." menu's deploy option —
+# this is an internal demo app, not meant to be pushed to Streamlit Cloud.
+toolbarMode = "minimal"

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "pipe-1001",
+    "name": "s4-public-cloud-core",
+    "branch": "main",
+    "status": "failed",
+    "triggered_by": "adithya.r",
+    "commit": "a1b2c3d",
+    "last_run": "2026-08-14T08:12:00Z",
+    "duration_sec": 742,
+    "stages": [
+      {"name": "build", "status": "success", "duration_sec": 210},
+      {"name": "unit-tests", "status": "success", "duration_sec": 180},
+      {"name": "integration-tests", "status": "failed", "duration_sec": 352},
+      {"name": "deploy-staging", "status": "skipped", "duration_sec": 0}
+    ]
+  },
+  {
+    "id": "pipe-1002",
+    "name": "dmc-insights-service",
+    "branch": "release/2508",
+    "status": "success",
+    "triggered_by": "meera.k",
+    "commit": "f4e5d6c",
+    "last_run": "2026-08-14T07:55:00Z",
+    "duration_sec": 613,
+    "stages": [
+      {"name": "build", "status": "success", "duration_sec": 190},
+      {"name": "unit-tests", "status": "success", "duration_sec": 205},
+      {"name": "integration-tests", "status": "success", "duration_sec": 218},
+      {"name": "deploy-staging", "status": "success", "duration_sec": 0}
+    ]
+  },
+  {
+    "id": "pipe-1003",
+    "name": "landscape-orchestrator",
+    "branch": "main",
+    "status": "running",
+    "triggered_by": "scheduler",
+    "commit": "9a8b7c6",
+    "last_run": "2026-08-14T09:01:00Z",
+    "duration_sec": 120,
+    "stages": [
+      {"name": "build", "status": "success", "duration_sec": 120},
+      {"name": "unit-tests", "status": "running", "duration_sec": 0},
+      {"name": "integration-tests", "status": "pending", "duration_sec": 0},
+      {"name": "deploy-staging", "status": "pending", "duration_sec": 0}
+    ]
+  },
+  {
+    "id": "pipe-1004",
+    "name": "joule-agent-gateway",
+    "branch": "feature/tool-routing",
+    "status": "failed",
+    "triggered_by": "adithya.r",
+    "commit": "3c2b1a0",
+    "last_run": "2026-08-14T06:40:00Z",
+    "duration_sec": 305,
+    "stages": [
+      {"name": "build", "status": "failed", "duration_sec": 305},
+      {"name": "unit-tests", "status": "skipped", "duration_sec": 0},
+      {"name": "integration-tests", "status": "skipped", "duration_sec": 0},
+      {"name": "deploy-staging", "status": "skipped", "duration_sec": 0}
+    ]
+  },
+  {
+    "id": "pipe-1005",
+    "name": "hdlfs-archiving-job",
+    "branch": "main",
+    "status": "success",
+    "triggered_by": "scheduler",
+    "commit": "d0e1f2a",
+    "last_run": "2026-08-14T05:30:00Z",
+    "duration_sec": 1180,
+    "stages": [
+      {"name": "build", "status": "success", "duration_sec": 160},
+      {"name": "unit-tests", "status": "success", "duration_sec": 240},
+      {"name": "integration-tests", "status": "success", "duration_sec": 480},
+      {"name": "deploy-staging", "status": "success", "duration_sec": 300}
+    ]
+  }
+]
