@@ -26,7 +26,39 @@ My key skills include:
 
 ### **a. Large Language Models(LLMs) & Agentic AI Projects:**
 
-#### **i.	AI Medical Summary Generation using LLMs for client in the medical insurance domain:**
+#### **i.	Agentic DevOps / Engineering Copilot:**
+
+* Development of a tool-using LLM agent that helps engineers track CI/CD pipelines, diagnose build/test failures, inspect resource usage, and manage tickets, as the productionizable evolution of an enterprise DevOps agent (e.g. an SAP Joule-style assistant). Runs fully locally against mock DevOps data, so no real CI/CD or ticketing credentials are required to try it.
+
+* Programming language used: Python.
+
+* Python libraries used:
+    * LangGraph
+    * LangChain
+    * langchain-ollama / langchain-openai
+    * FastAPI
+    * Streamlit
+    * python-dotenv
+
+* Other technologies used:
+    * Ollama: local LLM serving (tool-capable models such as Llama 3.1, Qwen 2.5, Mistral-Nemo), with OpenAI as a swappable alternative.
+    * Docker & Docker Compose: one-command run of the full stack (API, Streamlit UI, Ollama).
+    * GitHub Actions: CI workflow that runs the deterministic test/eval suite.
+
+* Architecture:
+    * Agentic design: a LangGraph ReAct planning + tool-routing loop (not a single prompt), exposed via a CLI, a FastAPI REST API, and a Streamlit chat UI.
+    * Tool use / function calling over a realistic DevOps toolset: `list_pipelines`, `get_pipeline_status`, `get_build_logs`, `get_resource_usage`, `list_tickets`, `count_tickets`, `create_ticket`.
+    * Human-in-the-loop (HITL) approval gate on the write action (`create_ticket`) — the agent must get explicit approval before changing anything.
+    * Clean separation of agent / tools / data, so tools can be swapped from mock JSON to real CI/CD, ITSM, and metrics APIs without touching the agent.
+
+* Datasets used:
+    * Mock DevOps data in local JSON: CI/CD pipelines with stages, statuses and commits; build/test logs; CPU/memory/build-minutes/cost per pipeline; engineering tickets.
+
+* Processing / evaluation steps:
+    * Automated, repeatable agent evaluation (not manual eyeballing), scoring four dimensions: tool correctness, answer correctness, no invented ids (grounding/faithfulness), and respected HITL (safety) — with latency and tool-sequence also recorded.
+    * Deterministic scorer/harness unit tests (no API key or model required) plus a full agent evaluation run against the labelled case dataset, wired into a CI pipeline via GitHub Actions.
+
+#### **ii.	AI Medical Summary Generation using LLMs for client in the medical insurance domain:**
 
 * Development of an application to generate AI-based LLM medical summaries to calculate the life expectancy of patients, using large-language models, to speed up medical insurance calculation by 70% and find candidates for potential insurance arbitration by 60%.
 
@@ -56,7 +88,7 @@ My key skills include:
     * Summarization: generation of medical summary using the de-identified information (with program-based chunking), pre-built input prompt and expert-created mortality multiplier information (.jsonl output).
     * Report generation: generating an output PDF report in a specific format, for presentation of the AI-based medical summary from the previous step (.pdf output).
 
-#### **ii.	SmartResolve: AI-powered RAG Agent for Quick Incident Resolution:**
+#### **iii.	SmartResolve: AI-powered RAG Agent for Quick Incident Resolution:**
 
 * Development of a RAG (Retrieval-Augmented Generation) AI-agent to help resolve customer incidents quickly, using the knowledge base of past resolved incidents. For a particular incident, the AI agent will retrieve the top 10 similar incidents, based on the details shared in the current open incident.
 

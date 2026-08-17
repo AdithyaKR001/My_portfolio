@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.git/
+eval/report.json
+eval/report.md
+*.md
+!README.md

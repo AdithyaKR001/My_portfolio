@@ -1,0 +1,7 @@
+{
+  "pipe-1001": {"cpu_cores_peak": 6.2, "memory_gb_peak": 11.4, "build_minutes": 12.4, "est_cost_usd": 0.83},
+  "pipe-1002": {"cpu_cores_peak": 4.1, "memory_gb_peak": 7.8, "build_minutes": 10.2, "est_cost_usd": 0.61},
+  "pipe-1003": {"cpu_cores_peak": 3.0, "memory_gb_peak": 5.2, "build_minutes": 2.0, "est_cost_usd": 0.14},
+  "pipe-1004": {"cpu_cores_peak": 2.4, "memory_gb_peak": 4.0, "build_minutes": 5.1, "est_cost_usd": 0.29},
+  "pipe-1005": {"cpu_cores_peak": 8.0, "memory_gb_peak": 22.6, "build_minutes": 19.7, "est_cost_usd": 1.42}
+}

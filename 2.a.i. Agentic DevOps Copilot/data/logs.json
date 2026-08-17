@@ -1,0 +1,7 @@
+{
+  "pipe-1001": "... integration-tests ...\n[INFO] Booting test container\n[INFO] Connecting to test DB hana-test:30015\n[ERROR] com.sap.dmc.OrderServiceIT > shouldReplicateOrder FAILED\n  java.net.SocketTimeoutException: Read timed out after 30000ms\n    at com.sap.dmc.client.HanaClient.query(HanaClient.java:142)\n[ERROR] 1 test failed, 84 passed\n[INFO] Likely cause: test DB connection pool exhausted under parallel test load.\n",
+  "pipe-1004": "... build ...\n[INFO] Resolving dependencies for joule-agent-gateway\n[ERROR] Could not resolve dependency: com.sap.ai:llm-router:2.4.1\n[ERROR] Version 2.4.1 not found in artifactory; latest is 2.3.9\n[ERROR] BUILD FAILED in 5m 05s\n[INFO] Likely cause: pom.xml references a llm-router version that was never published.\n",
+  "pipe-1002": "All stages passed. No errors.\n",
+  "pipe-1003": "Build stage passed. unit-tests currently running.\n",
+  "pipe-1005": "All stages passed. Archived 4.2M rows to HDLFS cold store.\n"
+}
