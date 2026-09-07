@@ -1,0 +1,55 @@
+services:
+  model-server:
+    build: .
+    environment:
+      - BACKEND=${BACKEND:-mock}
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-nomic-embed-text}
+      - BATCH_MAX_SIZE=${BATCH_MAX_SIZE:-16}
+      - BATCH_MAX_WAIT_MS=${BATCH_MAX_WAIT_MS:-20}
+      - CACHE_MAX_SIZE=${CACHE_MAX_SIZE:-2000}
+      - CACHE_TTL_SECONDS=${CACHE_TTL_SECONDS:-300}
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      - model-server
+
+  grafana:
+    image: grafana/grafana:11.1.0
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/etc/grafana/dashboards:ro
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+
+  # Not started by default (`docker compose up`). Run explicitly with:
+  #   docker compose run --rm loadtest
+  # Talks to the "model-server" service name, so Docker's embedded DNS
+  # round-robins it across every replica when model-server is scaled
+  # (docker compose up -d --scale model-server=3 --no-recreate model-server).
+  loadtest:
+    build: .
+    profiles: ["loadtest"]
+    environment:
+      - MODEL_SERVER_URL=http://model-server:8000
+    entrypoint: ["python", "-m", "loadtest.run_loadtest"]
+    depends_on:
+      - model-server

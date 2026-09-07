@@ -1,0 +1,31 @@
+# CPU-based HPA: the standard, zero-extra-infrastructure autoscaling signal.
+# See DESIGN.md "Autoscaling policy" for why this is a deliberate starting
+# point rather than the final answer for a batching workload, and what a
+# request-rate-based (KEDA) policy would look like instead.
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: model-server
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: model-server
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 120 # don't flap replicas down on a brief lull
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+        - type: Percent
+          value: 100
+          periodSeconds: 30

@@ -1,0 +1,110 @@
+{
+  "title": "Model Serving at Scale",
+  "uid": "model-serving-mini",
+  "timezone": "browser",
+  "refresh": "5s",
+  "time": { "from": "now-15m", "to": "now" },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Replicas up (model-server targets)",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+      "datasource": "Prometheus",
+      "targets": [{ "expr": "count(up{job=\"model-server\"} == 1)" }]
+    },
+    {
+      "id": 2,
+      "title": "Cache hit ratio",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+      "datasource": "Prometheus",
+      "fieldConfig": { "defaults": { "unit": "percentunit", "min": 0, "max": 1 } },
+      "targets": [
+        {
+          "expr": "sum(rate(embed_requests_total{cache=\"hit\"}[1m])) / sum(rate(embed_requests_total[1m]))"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Requests/sec (by cache outcome)",
+      "type": "timeseries",
+      "gridPos": { "h": 4, "w": 12, "x": 12, "y": 0 },
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "sum by (cache) (rate(embed_requests_total[1m]))",
+          "legendFormat": "{{cache}}"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "/embed latency (p50 / p95 / p99)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+      "datasource": "Prometheus",
+      "fieldConfig": { "defaults": { "unit": "s" } },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum by (le) (rate(http_request_duration_seconds_bucket{endpoint=\"/embed\"}[1m])))",
+          "legendFormat": "p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket{endpoint=\"/embed\"}[1m])))",
+          "legendFormat": "p95"
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum by (le) (rate(http_request_duration_seconds_bucket{endpoint=\"/embed\"}[1m])))",
+          "legendFormat": "p99"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Backend call duration (p95)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+      "datasource": "Prometheus",
+      "fieldConfig": { "defaults": { "unit": "s" } },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(backend_call_duration_seconds_bucket[1m])))",
+          "legendFormat": "p95 backend call"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Average batch size",
+      "type": "timeseries",
+      "gridPos": { "h": 6, "w": 8, "x": 0, "y": 12 },
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "sum(rate(embed_batch_size_sum[1m])) / sum(rate(embed_batch_size_count[1m]))",
+          "legendFormat": "avg batch size"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Queue depth",
+      "type": "timeseries",
+      "gridPos": { "h": 6, "w": 8, "x": 8, "y": 12 },
+      "datasource": "Prometheus",
+      "targets": [{ "expr": "embed_queue_depth", "legendFormat": "{{instance}}" }]
+    },
+    {
+      "id": 8,
+      "title": "Cache size",
+      "type": "timeseries",
+      "gridPos": { "h": 6, "w": 8, "x": 16, "y": 12 },
+      "datasource": "Prometheus",
+      "targets": [{ "expr": "cache_size", "legendFormat": "{{instance}}" }]
+    }
+  ],
+  "schemaVersion": 39,
+  "version": 1
+}

@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  # dns_sd_configs re-resolves the "model-server" DNS name on every
+  # refresh_interval and scrapes EVERY returned A record as its own target.
+  # That means `docker compose up --scale model-server=N` is picked up
+  # automatically — Prometheus ends up with one target per replica instead
+  # of sampling whichever replica a load balancer happened to route to.
+  - job_name: model-server
+    dns_sd_configs:
+      - names: ["model-server"]
+        type: A
+        port: 8000
+        refresh_interval: 15s
+
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
