@@ -1,0 +1,26 @@
+name: rag-eval
+
+# Deterministic layer runs on every push (no model needed): data generation +
+# metric unit tests. The full RAG eval needs Ollama/embeddings and is intended to
+# run locally or on a self-hosted runner; wire it in there and gate on the report.
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  deterministic-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install (metrics only — no heavy vector deps needed for unit tests)
+        run: pip install python-dotenv
+      - name: Regenerate corpus + golden set
+        run: python scripts/generate_data.py --incidents 220
+      - name: RAG metric unit tests (no model)
+        run: python -m eval.test_eval
