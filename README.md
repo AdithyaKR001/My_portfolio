@@ -91,7 +91,39 @@ My key skills include:
     * A RAG-specific evaluation harness (deterministic, unit-tested) scoring hit-rate@k, recall@k, precision@k, MRR, answer key-fact coverage, and citation validity.
     * Automated, gated pipeline: evaluation exits non-zero when hit-rate@k falls below threshold, so CI can block retrieval/quality regressions.
 
-#### **iii.	AI Medical Summary Generation using LLMs for client in the medical insurance domain:**
+#### **iii.	Model Serving at Scale (mini):**
+
+* Development of a focused demonstration of scalable, observable model inference: a FastAPI embedding service with server-side request batching, an LRU+TTL cache, Prometheus metrics, a Grafana dashboard, and a Kubernetes HorizontalPodAutoscaler, backed by a load test that measures the effect of batching and caching rather than just claiming it. Runs fully locally with a dependency-free mock backend (no model download, no API key), and is pluggable to a real local Ollama embedding model with one env var.
+
+* Programming language used: Python.
+
+* Python libraries used:
+    * FastAPI
+    * Pydantic / pydantic-settings
+    * prometheus-client
+    * cachetools
+    * NumPy
+    * httpx
+
+* Other technologies used:
+    * Docker & Docker Compose: one-command stack (app + Prometheus + Grafana), with DNS-based service discovery so scaling replicas locally (`--scale`) is picked up automatically by both routing and metrics scraping.
+    * Prometheus: request rate, cache hit ratio, batch size, backend latency, and queue depth.
+    * Grafana: auto-provisioned dashboard visualizing all of the above.
+    * Kubernetes: Deployment + HorizontalPodAutoscaler (CPU-based) manifests for the production autoscaling path.
+
+* Architecture:
+    * Dynamic server-side batching: concurrent single-item embed requests are coalesced into one backend call (bounded by a max batch size and a max wait time), amortizing per-call model overhead.
+    * LRU+TTL cache in front of the batcher, so a repeated query skips inference entirely.
+    * A pluggable embedding backend: a deterministic, dependency-free mock by default, or a real Ollama model (`nomic-embed-text`) behind one environment variable — the same embedding call Incident-RAG's ingestion pipeline makes, now batched, cached, metered, and horizontally scalable.
+
+* Datasets used:
+    * Synthetic request text generated at load-test time (no external dataset needed) to exercise realistic repeat/cache-hit patterns.
+
+* Processing / evaluation steps:
+    * A before/after load test comparing three server configurations (no batching or caching, batching only, batching plus caching) under identical concurrent traffic, reporting throughput and p50/p95/p99 latency for each — checked-in result shows roughly a 9x throughput improvement from naive to fully-optimized.
+    * Deterministic unit tests (cache eviction/TTL, mock backend, and batch-coalescing behaviour) requiring no model or network access, wired into CI via GitHub Actions.
+
+#### **iv.	AI Medical Summary Generation using LLMs for client in the medical insurance domain:**
 
 * Development of an application to generate AI-based LLM medical summaries to calculate the life expectancy of patients, using large-language models, to speed up medical insurance calculation by 70% and find candidates for potential insurance arbitration by 60%.
 
@@ -121,7 +153,7 @@ My key skills include:
     * Summarization: generation of medical summary using the de-identified information (with program-based chunking), pre-built input prompt and expert-created mortality multiplier information (.jsonl output).
     * Report generation: generating an output PDF report in a specific format, for presentation of the AI-based medical summary from the previous step (.pdf output).
 
-#### **iv.	SmartResolve: AI-powered RAG Agent for Quick Incident Resolution:**
+#### **v.	SmartResolve: AI-powered RAG Agent for Quick Incident Resolution:**
 
 * Development of a RAG (Retrieval-Augmented Generation) AI-agent to help resolve customer incidents quickly, using the knowledge base of past resolved incidents. For a particular incident, the AI agent will retrieve the top 10 similar incidents, based on the details shared in the current open incident.
 

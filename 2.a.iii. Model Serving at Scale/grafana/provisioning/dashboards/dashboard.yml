@@ -1,0 +1,9 @@
+apiVersion: 1
+
+providers:
+  - name: model-serving
+    folder: ""
+    type: file
+    updateIntervalSeconds: 30
+    options:
+      path: /etc/grafana/dashboards
